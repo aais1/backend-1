@@ -2,12 +2,17 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRoutes');
+const dotenv = require('dotenv');  // Make sure to import the dotenv package
+
 
 // express app
 const app = express();
 
+dotenv.config();  // Load environment variables from .env file
+
 // connect to mongodb & listen for requests
-const dbURI = "mongodb+srv://ali:test1234@nodetuts.mvnydja.mongodb.net/?retryWrites=true&w=majority";
+const dbURI = process.env.MONGODB_URI;
+
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(result =>{
